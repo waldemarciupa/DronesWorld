@@ -10,7 +10,7 @@ routes.get('/user/register', (req, res) => {
     res.send('Hello from register');
 })
 
-routes.post('/register', UserController.store)
+routes.post('/register', UserController.createUser)
 routes.get('/user/:userId', UserController.getUserById)
 
 module.exports = routes;
