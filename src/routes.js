@@ -12,6 +12,7 @@ routes.get('/status', (req, res) => {
 });
 
 // Event 
+routes.get('/event/:eventId', EventController.getEventById);
 routes.post('/event', upload.single('thumbnail'), EventController.createEvent);
 
 // User
