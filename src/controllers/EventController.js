@@ -5,6 +5,8 @@ module.exports = {
     async createEvent(req, res) {
         const { title, description, price } = req.body;
         const { userId } = req.headers;
+        const { filename } = req.file;
+
         const user_id = await User.findById(userId);
 
         if (!user) {
@@ -17,7 +19,10 @@ module.exports = {
             title,
             description,
             price,
-            user: user_id
+            user: user_id,
+            thumbnail: filename
         })
+
+        return res.json(event);
     }
 }
