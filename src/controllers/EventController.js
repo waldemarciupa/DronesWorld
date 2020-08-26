@@ -56,7 +56,7 @@ module.exports = {
         }
     },
 
-    async getAllEvents(req, res) {
+    async getAllEventsBySport(req, res) {
         const { sport } = req.params;
         const query = { sport } || {};
 
@@ -69,6 +69,19 @@ module.exports = {
         } catch (error) {
             return res.status(400).json({
                 message: 'We do not have any event yet, sorry!'
+            })
+        }
+    },
+
+    async delete(req, res) {
+        const { eventId } = req.params;
+
+        try {
+            await Event.findByIdAndDelete(eventId);
+            return res.status(204).send()
+        } catch (error) {
+            return res.status(400).json({
+                message: 'We do not have any event with the ID!'
             })
         }
     }
