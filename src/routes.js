@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const UserController = require('./controllers/UserController');
 const EventController = require('./controllers/EventController');
+const DashboardController = require('./controllers/DashboardController');
 const uploadConfig = require('./config/upload');
 
 const routes = express.Router();
@@ -11,10 +12,12 @@ routes.get('/status', (req, res) => {
     res.send({ status: 200 });
 });
 
+// Dashboard
+routes.get('/dashboard/:sport', DashboardController.getAllEvents);
+routes.get('/dashoard', DashboardController.getAllEvents);
+routes.get('/event/:eventId', DashboardController.getEventById);
+
 // Event 
-routes.get('/events/:sport', EventController.getAllEventsBySport);
-routes.get('/events', EventController.getAllEvents);
-routes.get('/event/:eventId', EventController.getEventById);
 routes.post('/event', upload.single('thumbnail'), EventController.createEvent);
 routes.delete('/event/:eventId', EventController.delete)
 
