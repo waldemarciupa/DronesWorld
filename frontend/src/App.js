@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import Login from './pages/Login/index';
-import Dashboard from './pages/Dashboard/index';
+import { Container } from 'reactstrap';
+import Routes from './routes';
 
 function App() {
   return (
-    <div className="App">
-      <Login />
-      <Dashboard />
-    </div>
+    <Container>
+      <h1>Sport's App</h1>
+      <Routes />
+    </Container>
   );
 }
 
