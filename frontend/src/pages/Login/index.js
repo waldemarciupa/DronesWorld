@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import api from '../../services/api';
 import { Button, Form, FormGroup, Label, Input, } from 'reactstrap';
 
 export default function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     return (
-        <Form inline>
+        <Form >
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label for="exampleEmail" className="mr-sm-2">Email</Label>
                 <Input
                     type="email"
                     name="email"
-                    id="exampleEmail"
-                    placeholder="something@idk.cool" />
+                    id="email"
+                    placeholder="Email" />
             </FormGroup>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label for="examplePassword" className="mr-sm-2">Password</Label>
-                <Input type="password" name="password" id="examplePassword" placeholder="don't tell!" />
+                <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password" />
             </FormGroup>
             <Button>Submit</Button>
         </Form>
