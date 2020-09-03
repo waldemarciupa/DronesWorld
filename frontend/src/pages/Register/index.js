@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
-import { Button, Form, FormGroup, Label, Input, } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container, } from 'reactstrap';
 
 export default function Register({ history }) {
     const [email, setEmail] = useState('');
@@ -27,44 +27,48 @@ export default function Register({ history }) {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Input
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    placeholder="First Name"
-                    onChange={event => setFirstName(event.target.value)}
-                />
-            </FormGroup>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Input
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    placeholder="Last Name"
-                    onChange={event => setLastName(event.target.value)}
-                />
-            </FormGroup>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Email"
-                    onChange={event => setEmail(event.target.value)}
-                />
-            </FormGroup>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Password"
-                    onChange={event => setPassword(event.target.value)}
-                />
-            </FormGroup>
-            <Button>Submit</Button>
-        </Form>
+        <Container>
+            <h2>Register</h2>
+            <p>Please <strong>register</strong> for a new account</p>
+            <Form onSubmit={handleSubmit}>
+                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                    <Input
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                        placeholder="First Name"
+                        onChange={event => setFirstName(event.target.value)}
+                    />
+                </FormGroup>
+                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                    <Input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        placeholder="Last Name"
+                        onChange={event => setLastName(event.target.value)}
+                    />
+                </FormGroup>
+                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                    <Input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email"
+                        onChange={event => setEmail(event.target.value)}
+                    />
+                </FormGroup>
+                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                    <Input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Password"
+                        onChange={event => setPassword(event.target.value)}
+                    />
+                </FormGroup>
+                <Button>Submit</Button>
+            </Form>
+        </Container>
     )
 }
