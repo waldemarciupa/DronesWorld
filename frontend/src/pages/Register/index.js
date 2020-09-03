@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import api from '../../services/api';
 import { Button, Form, FormGroup, Label, Input, } from 'reactstrap';
 
-export default function Login({ history }) {
+export default function Register({ history }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
 
     const handleSubmit = async event => {
         event.preventDefault();
-        console.log(email, password);
+        console.log(email, password, firstName, lastName);
 
-        const response = await api.post('/login', { email, password });
+        const response = await api.post('/login', { email, password, firstName, lastName });
 
         const userId = response.data._id || false;
 
@@ -26,6 +28,24 @@ export default function Login({ history }) {
 
     return (
         <Form onSubmit={handleSubmit}>
+            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                <Input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    placeholder="First Name"
+                    onChange={event => setFirstName(event.target.value)}
+                />
+            </FormGroup>
+            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                <Input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    placeholder="Last Name"
+                    onChange={event => setLastName(event.target.value)}
+                />
+            </FormGroup>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                 <Input
                     type="email"
