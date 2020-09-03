@@ -12,7 +12,7 @@ export default function Register({ history }) {
         event.preventDefault();
         console.log(email, password, firstName, lastName);
 
-        const response = await api.post('/login', { email, password, firstName, lastName });
+        const response = await api.post('/user/register', { email, password, firstName, lastName });
 
         const userId = response.data._id || false;
 
