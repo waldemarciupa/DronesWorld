@@ -2,13 +2,25 @@ import React, { useState } from 'react';
 import api from '../../services/api';
 import { Button, Form, FormGroup, Label, Input, } from 'reactstrap';
 
-export default function Login() {
+export default function Login({ history }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async event => {
         event.preventDefault();
         console.log(email, password);
+
+        const response = await api.post('/login', { email, password });
+
+        const userId = response.data._id || false;
+
+        if (userId) {
+            localStorage.setItem('user', userId)
+            history.push('/dashboard')
+        } else {
+            const { message } = response.data
+            console.log(message);
+        }
     }
 
     return (
