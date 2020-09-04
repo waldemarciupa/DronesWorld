@@ -6,7 +6,6 @@ import './events.css';
 
 // Events willl show all events
 export default function EventsPage() {
-    const user_id = localStorage.getItem('user');
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -19,7 +18,20 @@ export default function EventsPage() {
         return thumbnail ? URL.createObjectURL(thumbnail) : null;
     }, [thumbnail])
 
-    const handleSubmit = () => {
+
+    const handleSubmit = (event) => {
+        const user_id = localStorage.getItem('user');
+        const eventData = new FormData;
+
+        eventData.append("thumbnail", thumbnail);
+        eventData.append("sport", sport);
+        eventData.append("title", title);
+        eventData.append("price", price);
+        eventData.append("description", description);
+        eventData.append("date", date);
+
+        event.preventDefault()
+        console.log(title, description, price, sport);
         return ''
     }
 
@@ -68,7 +80,7 @@ export default function EventsPage() {
                         id="description"
                         type="text"
                         value={description}
-                        placeholder="Event Dsescription"
+                        placeholder="Event Description"
                         onChange={(event) => setDescription(event.target.value)}
                     />
                 </FormGroup>
@@ -80,6 +92,16 @@ export default function EventsPage() {
                         value={price}
                         placeholder="Event Price"
                         onChange={(event) => setPrice(event.target.value)}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Date: </Label>
+                    <Input
+                        id="date"
+                        type="date"
+                        value={date}
+                        placeholder="Event Date"
+                        onChange={(event) => setDate(event.target.value)}
                     />
                 </FormGroup>
                 <Button type="submit">
