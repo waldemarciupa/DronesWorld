@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import api from '../../services/api'
 import { Button, Form, FormGroup, Label, Input, Container, } from 'reactstrap';
 import CameraIcon from '../../assets/camera.png';
@@ -14,6 +14,10 @@ export default function EventsPage() {
     const [date, setDate] = useState('');
     const [sport, setSport] = useState('');
 
+    const preview = useMemo(() => {
+        return thumbnail ? URL.createObjectURL(thumbnail) : null;
+    }, [thumbnail])
+
     const handleSubmit = () => {
         return ''
     }
@@ -24,8 +28,8 @@ export default function EventsPage() {
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label>Upload Image: </Label>
+                    <Label id='thumbnail' style={{ backgroundImage: `url(${preview})` }}></Label>
                     <Input
-                        id="thumbnail"
                         type="file"
                         onChange={(event) => setThumbnail(event.target.files[0])}
                     />
