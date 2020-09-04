@@ -1,25 +1,84 @@
 import React, { useState } from 'react';
+import api from '../../services/api'
+import { Button, Form, FormGroup, Label, Input, Container, } from 'reactstrap';
+import CameraIcon from '../../assets/camera.png';
 
 // Events willl show all events
-
-// title: String,
-// description: String,
-// price: Number,
-// thumbnail: String,
-// date: Date,
-// sport: String,
-
 export default function EventsPage() {
     const user_id = localStorage.getItem('user');
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [thumbnail, setThumbnail] = useState('');
     const [date, setDate] = useState('');
+    const [sport, setSport] = useState('');
+
+    const handleSubmit = () => {
+        return ''
+    }
 
     return (
-        <div>
-            Hello from Events
-        </div>
+        <Container>
+            <h1>Create your Event</h1>
+            <Form onSubmit={handleSubmit}>
+                <FormGroup>
+                    <Label>Upload Image: </Label>
+                    <Input
+                        id="thumbnail"
+                        type="file"
+                        onChange={(event) => setThumbnail(event.target.files[0])}
+                    />
+                    <img
+                        src={CameraIcon}
+                        style={{ maxWidth: "50px" }}
+                        alt="upload icon image"
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Sport: </Label>
+                    <Input
+                        id="sport"
+                        type="text"
+                        value={sport}
+                        placeholder="Sport name"
+                        onChange={(event) => setSport(event.target.value)}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Title: </Label>
+                    <Input
+                        id="title"
+                        type="text"
+                        value={title}
+                        placeholder="Event Title"
+                        onChange={(event) => setTitle(event.target.value)}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Description: </Label>
+                    <Input
+                        id="description"
+                        type="text"
+                        value={description}
+                        placeholder="Event Dsescription"
+                        onChange={(event) => setDescription(event.target.value)}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Price: </Label>
+                    <Input
+                        id="price"
+                        type="text"
+                        value={price}
+                        placeholder="Event Price"
+                        onChange={(event) => setPrice(event.target.value)}
+                    />
+                </FormGroup>
+                <Button type="submit">
+                    Create Event
+                </Button>
+            </Form>
+        </Container>
     )
 }
