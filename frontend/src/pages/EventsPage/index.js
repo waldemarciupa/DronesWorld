@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import api from '../../services/api'
 import { Button, Form, FormGroup, Label, Input, Container, } from 'reactstrap';
 import CameraIcon from '../../assets/camera.png';
+import './events.css';
 
 // Events willl show all events
 export default function EventsPage() {
@@ -28,16 +29,18 @@ export default function EventsPage() {
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label>Upload Image: </Label>
-                    <Label id='thumbnail' style={{ backgroundImage: `url(${preview})` }}></Label>
-                    <Input
-                        type="file"
-                        onChange={(event) => setThumbnail(event.target.files[0])}
-                    />
-                    <img
-                        src={CameraIcon}
-                        style={{ maxWidth: "50px" }}
-                        alt="upload icon image"
-                    />
+                    <Label id='thumbnail' style={{ backgroundImage: `url(${preview})` }}
+                        className={thumbnail ? 'has-thumbnail' : ''}>
+                        <Input
+                            type="file"
+                            onChange={(event) => setThumbnail(event.target.files[0])}
+                        />
+                        <img
+                            src={CameraIcon}
+                            style={{ maxWidth: "50px" }}
+                            alt="upload icon image"
+                        />
+                    </Label>
                 </FormGroup>
                 <FormGroup>
                     <Label>Sport: </Label>
