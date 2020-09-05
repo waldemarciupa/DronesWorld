@@ -37,7 +37,11 @@ export default function EventsPage() {
             date !== "" &&
             thumbnail !== null
         ) {
-            await api.post('/event', eventData, { headers: { user_id } })
+            try {
+                await api.post('/event', eventData, { headers: { user_id } })
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         event.preventDefault()
