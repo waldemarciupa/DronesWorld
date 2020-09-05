@@ -13,13 +13,14 @@ export default function EventsPage() {
     const [thumbnail, setThumbnail] = useState(null);
     const [date, setDate] = useState('');
     const [sport, setSport] = useState('');
+    const [errorMessage, setErrorMessage] = useState(false);
 
     const preview = useMemo(() => {
         return thumbnail ? URL.createObjectURL(thumbnail) : null;
-    }, [thumbnail])
-
+    }, [thumbnail]);
 
     const handleSubmit = async (event) => {
+        event.preventDefault();
         const user_id = localStorage.getItem('user');
         const eventData = new FormData;
 
@@ -30,23 +31,26 @@ export default function EventsPage() {
         eventData.append("description", description);
         eventData.append("date", date);
 
-        if (title !== "" &&
-            description !== "" &&
-            price !== "" &&
-            sport !== "" &&
-            date !== "" &&
-            thumbnail !== null
-        ) {
-            try {
-                await api.post('/event', eventData, { headers: { user_id } })
-            } catch (error) {
-                console.log(error);
-            }
-        }
 
-        event.preventDefault()
-        console.log(title, description, price, sport);
-        return ''
+        try {
+            if (title !== "" &&
+                description !== "" &&
+                price !== "" &&
+                sport !== "" &&
+                date !== "" &&
+                thumbnail !== null
+            ) {
+                await api.post('/event', eventData, { headers: { user_id } })
+            } else {
+                setErrorMessage(true);
+                setTimeout(() => {
+                    setErrorMessage(false)
+                }, 2000);
+                console.log('Missing required data');
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -122,6 +126,9 @@ export default function EventsPage() {
                     Create Event
                 </Button>
             </Form>
+            {errorMessage ? (
+                <div>Missing required information</div>
+            ) : ""}
         </Container>
     )
 }
