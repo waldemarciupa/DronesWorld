@@ -10,7 +10,7 @@ export default function EventsPage() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [thumbnail, setThumbnail] = useState('');
+    const [thumbnail, setThumbnail] = useState(null);
     const [date, setDate] = useState('');
     const [sport, setSport] = useState('');
 
@@ -19,7 +19,7 @@ export default function EventsPage() {
     }, [thumbnail])
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         const user_id = localStorage.getItem('user');
         const eventData = new FormData;
 
@@ -29,6 +29,16 @@ export default function EventsPage() {
         eventData.append("price", price);
         eventData.append("description", description);
         eventData.append("date", date);
+
+        if (title !== "" &&
+            description !== "" &&
+            price !== "" &&
+            sport !== "" &&
+            date !== "" &&
+            thumbnail !== null
+        ) {
+            await api.post('/event', eventData, { headers: { user_id } })
+        }
 
         event.preventDefault()
         console.log(title, description, price, sport);
