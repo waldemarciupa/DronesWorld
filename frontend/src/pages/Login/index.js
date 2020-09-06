@@ -1,27 +1,35 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
-import { Button, Form, FormGroup, Label, Input, Container, } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container, Alert } from 'reactstrap';
 
 export default function Login({ history }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async event => {
         event.preventDefault();
-        console.log(email, password);
-
         const response = await api.post('/login', { email, password });
-
         const userId = response.data._id || false;
 
-        if (userId) {
-            localStorage.setItem('user', userId)
-            history.push('/dashboard')
-        } else {
-            const { message } = response.data
-            console.log(message
-            );
+        try {
+            if (userId) {
+                localStorage.setItem('user', userId);
+                history.push('/')
+            } else {
+                const { message } = response.data;
+                setError(true);
+                setErrorMessage(message);
+                setTimeout(() => {
+                    setError(false);
+                    setErrorMessage('');
+                }, 3000);
+            }
+        } catch (error) {
+
         }
+
     }
 
     return (
@@ -47,8 +55,16 @@ export default function Login({ history }) {
                         onChange={event => setPassword(event.target.value)}
                     />
                 </FormGroup>
-                <Button>Submit</Button>
+                <FormGroup>
+                    <Button>Submit</Button>
+                </FormGroup>
             </Form>
+            {error ? (
+                <Alert
+                    className="event-validation"
+                    color="danger"
+                >{errorMessage}</Alert>
+            ) : ""}
         </Container>
     )
 }

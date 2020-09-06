@@ -31,7 +31,6 @@ export default function EventsPage() {
         eventData.append("description", description);
         eventData.append("date", date);
 
-
         try {
             if (title !== "" &&
                 description !== "" &&
@@ -45,7 +44,7 @@ export default function EventsPage() {
                 setErrorMessage(true);
                 setTimeout(() => {
                     setErrorMessage(false)
-                }, 5000);
+                }, 3000);
                 console.log('Missing required data');
             }
         } catch (error) {
