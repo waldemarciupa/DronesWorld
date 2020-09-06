@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import api from '../../services/api'
-import { Button, Form, FormGroup, Label, Input, Container, } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container, Alert } from 'reactstrap';
 import CameraIcon from '../../assets/camera.png';
 import './events.css';
 
@@ -45,7 +45,7 @@ export default function EventsPage() {
                 setErrorMessage(true);
                 setTimeout(() => {
                     setErrorMessage(false)
-                }, 2000);
+                }, 5000);
                 console.log('Missing required data');
             }
         } catch (error) {
@@ -127,7 +127,7 @@ export default function EventsPage() {
                 </Button>
             </Form>
             {errorMessage ? (
-                <div>Missing required information</div>
+                <Alert className="event-validation" color="danger">Missing required information</Alert>
             ) : ""}
         </Container>
     )
