@@ -13,7 +13,8 @@ export default function EventsPage({ history }) {
     const [thumbnail, setThumbnail] = useState(null);
     const [date, setDate] = useState('');
     const [sport, setSport] = useState('');
-    const [errorMessage, setErrorMessage] = useState(false);
+    const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const preview = useMemo(() => {
         return thumbnail ? URL.createObjectURL(thumbnail) : null;
@@ -39,11 +40,15 @@ export default function EventsPage({ history }) {
                 date !== "" &&
                 thumbnail !== null
             ) {
-                await api.post('/event', eventData, { headers: { user_id } })
-            } else {
-                setErrorMessage(true);
+                await api.post('/event', eventData, { headers: { user_id } });
+                setSuccess(true);
                 setTimeout(() => {
-                    setErrorMessage(false)
+                    setSuccess(false);
+                }, 3000);
+            } else {
+                setError(true);
+                setTimeout(() => {
+                    setError(false)
                 }, 3000);
                 console.log('Missing required data');
             }
@@ -137,8 +142,11 @@ export default function EventsPage({ history }) {
                 </Button>
                 </FormGroup>
             </Form>
-            {errorMessage ? (
+            {error ? (
                 <Alert className="event-validation" color="danger">Missing required information</Alert>
+            ) : ""}
+            {success ? (
+                <Alert className="event-validation" color="success">The event was created succesfully</Alert>
             ) : ""}
         </Container>
     )
