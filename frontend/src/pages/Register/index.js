@@ -31,43 +31,54 @@ export default function Register({ history }) {
             <h2>Register</h2>
             <p>Please <strong>register</strong> for a new account</p>
             <Form onSubmit={handleSubmit}>
-                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                    <Input
-                        type="text"
-                        name="firstName"
-                        id="firstName"
-                        placeholder="First Name"
-                        onChange={event => setFirstName(event.target.value)}
-                    />
+                <div className='input-group'>
+                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                        <Input
+                            type="text"
+                            name="firstName"
+                            id="firstName"
+                            placeholder="First Name"
+                            onChange={event => setFirstName(event.target.value)}
+                        />
+                    </FormGroup>
+                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                        <Input
+                            type="text"
+                            name="lastName"
+                            id="lastName"
+                            placeholder="Last Name"
+                            onChange={event => setLastName(event.target.value)}
+                        />
+                    </FormGroup>
+                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                        <Input
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="Email"
+                            onChange={event => setEmail(event.target.value)}
+                        />
+                    </FormGroup>
+                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                        <Input
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="Password"
+                            onChange={event => setPassword(event.target.value)}
+                        />
+                    </FormGroup>
+                </div>
+                <FormGroup>
+                    <Button className="submit-btn">Submit</Button>
                 </FormGroup>
-                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                    <Input
-                        type="text"
-                        name="lastName"
-                        id="lastName"
-                        placeholder="Last Name"
-                        onChange={event => setLastName(event.target.value)}
-                    />
+                <FormGroup>
+                    <Button
+                        className='secondary-btn'
+                        onClick={() => {
+                            history.push('/login')
+                        }}>Login</Button>
                 </FormGroup>
-                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                    <Input
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Email"
-                        onChange={event => setEmail(event.target.value)}
-                    />
-                </FormGroup>
-                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                    <Input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Password"
-                        onChange={event => setPassword(event.target.value)}
-                    />
-                </FormGroup>
-                <Button>Submit</Button>
             </Form>
         </Container>
     )
