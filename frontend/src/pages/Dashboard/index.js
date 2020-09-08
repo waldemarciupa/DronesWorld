@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import moment from 'moment';
+import './dashboard.css';
 
 // Dashboard willl show all events
 export default function Dashboard() {
@@ -25,9 +26,9 @@ export default function Dashboard() {
                 <li key={event._id}>
                     <header style={{ backgroundImage: `url(${event.thumbnail_url})` }} />
                     <strong>{event.title}</strong>
+                    <span>{moment(event.date).format('LL')}</span>
                     <span>{event.price}</span>
                     <span>{event.description}</span>
-                    <span>{moment(event.date).format('DDMMYY')}</span>
                 </li>
             ))}
         </ul>
