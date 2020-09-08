@@ -25,3 +25,9 @@ ul.events-list li strong {
     font-size: 24px;
     color: #444;
 }
+
+@media (max-width: 770px) {
+    ul.events-list {
+        grid-template-columns: 1fr;
+    }
+}
