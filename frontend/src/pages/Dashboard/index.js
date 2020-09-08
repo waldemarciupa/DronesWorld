@@ -7,7 +7,7 @@ export default function Dashboard() {
     const user_id = localStorage.getItem('user');
 
     const getEvents = async (filter) => {
-        const url = filter ? `/dasboard/${filter}` : '/dashboard';
+        const url = filter ? `/dashboard/${filter}` : '/dashboard';
         const response = await api.get(url, { headers: { user_id } });
 
         setEvents(response.data);
@@ -19,8 +19,15 @@ export default function Dashboard() {
 
     console.log(events);
     return (
-        <div>
-            Hello from Dashboard
-        </div>
+        <ul className="events-list">
+            {events.map(event => (
+                <li key={event._id}>
+                    <header style={{ backgroundImage: `url(${event.thumbnail_url})` }} />
+                    <strong>{event.title}</strong>
+                    <span>{event.price}</span>
+                    <span>{event.description}</span>
+                </li>
+            ))}
+        </ul>
     )
 }
