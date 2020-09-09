@@ -18,6 +18,11 @@ export default function Dashboard() {
         setEvents(response.data);
     };
 
+    const handleFilter = (query) => {
+        setRSelected(query);
+        getEvents(query);
+    }
+
     useEffect(() => {
         getEvents();
     }, [])
@@ -30,16 +35,20 @@ export default function Dashboard() {
                 <ButtonGroup>
                     <Button
                         color="primary"
-                        onClick={() => setRSelected(1)}
-                        active={rSelected === 1}>Running</Button>
+                        onClick={() => handleFilter(null)}
+                        active={rSelected === null}>All</Button>
                     <Button
                         color="primary"
-                        onClick={() => setRSelected(2)}
-                        active={rSelected === 2}>eSport</Button>
+                        onClick={() => handleFilter('running')}
+                        active={rSelected === 'running'}>Running</Button>
                     <Button
                         color="primary"
-                        onClick={() => setRSelected(3)}
-                        active={rSelected === 3}>Swimming</Button>
+                        onClick={() => handleFilter('esport')}
+                        active={rSelected === 'esport'}>eSport</Button>
+                    <Button
+                        color="primary"
+                        onClick={() => handleFilter('swimming')}
+                        active={rSelected === 'swimming'}>Swimming</Button>
                 </ButtonGroup>
             </div>
             <ul className="events-list">
