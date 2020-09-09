@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import moment from 'moment';
 import './dashboard.css';
-import { Button } from 'reactstrap';
+import { Button, ButtonGroup } from 'reactstrap';
 
 // Dashboard willl show all events
 export default function Dashboard() {
     const [events, setEvents] = useState([]);
+    const [cSelected, setCSelected] = useState([]);
+    const [rSelected, setRSelected] = useState(null);
     const user_id = localStorage.getItem('user');
 
     const getEvents = async (filter) => {
@@ -22,17 +24,36 @@ export default function Dashboard() {
 
     console.log(events);
     return (
-        <ul className="events-list">
-            {events.map(event => (
-                <li key={event._id}>
-                    <header style={{ backgroundImage: `url(${event.thumbnail_url})` }} />
-                    <strong>{event.title}</strong>
-                    <span>Event date: {moment(event.date).format('LL')}</span>
-                    <span>Event price: {parseFloat(event.price).toFixed(2)}</span>
-                    <span>Event description: {event.description}</span>
-                    <Button color="primary">Subscribe</Button>
-                </li>
-            ))}
-        </ul>
+        <>
+            <div>
+                Filter:
+                <ButtonGroup>
+                    <Button
+                        color="primary"
+                        onClick={() => setRSelected(1)}
+                        active={rSelected === 1}>Running</Button>
+                    <Button
+                        color="primary"
+                        onClick={() => setRSelected(2)}
+                        active={rSelected === 2}>eSport</Button>
+                    <Button
+                        color="primary"
+                        onClick={() => setRSelected(3)}
+                        active={rSelected === 3}>Swimming</Button>
+                </ButtonGroup>
+            </div>
+            <ul className="events-list">
+                {events.map(event => (
+                    <li key={event._id}>
+                        <header style={{ backgroundImage: `url(${event.thumbnail_url})` }} />
+                        <strong>{event.title}</strong>
+                        <span>Event date: {moment(event.date).format('LL')}</span>
+                        <span>Event price: {parseFloat(event.price).toFixed(2)}</span>
+                        <span>Event description: {event.description}</span>
+                        <Button color="primary">Subscribe</Button>
+                    </li>
+                ))}
+            </ul>
+        </>
     )
 }
