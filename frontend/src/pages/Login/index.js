@@ -27,7 +27,8 @@ export default function Login({ history }) {
                 }, 3000);
             }
         } catch (error) {
-
+            setError(true);
+            setErrorMessage(error);
         }
 
     }
