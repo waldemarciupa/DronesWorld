@@ -39,7 +39,7 @@ export default function EventsPage({ history }) {
             if (title !== "" &&
                 description !== "" &&
                 price !== "" &&
-                sport !== "" &&
+                sport !== "Choose Sport" &&
                 date !== "" &&
                 thumbnail !== null
             ) {
@@ -166,7 +166,7 @@ export default function EventsPage({ history }) {
                 </FormGroup>
                 <FormGroup>
                     <Button
-                        onClick={() => history.push('/dashboard')}
+                        onClick={() => history.push('/')}
                         className="secondary-btn"
                         type="submit">
                         Dashboard

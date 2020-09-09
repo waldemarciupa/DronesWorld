@@ -49,6 +49,10 @@ export default function Dashboard() {
                         color="primary"
                         onClick={() => handleFilter('swimming')}
                         active={rSelected === 'swimming'}>Swimming</Button>
+                    <Button
+                        color="primary"
+                        onClick={() => handleFilter('Cycling')}
+                        active={rSelected === 'Cycling'}>Cycling</Button>
                 </ButtonGroup>
             </div>
             <ul className="events-list">
