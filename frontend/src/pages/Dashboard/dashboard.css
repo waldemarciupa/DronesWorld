@@ -26,7 +26,10 @@ ul.events-list li strong {
     color: #444;
 }
 
-
+.filter-panel {
+    display: flex;
+    justify-content: space-between;    
+}
 
 @media (max-width: 770px) {
     ul.events-list {

@@ -5,7 +5,7 @@ import './dashboard.css';
 import { Button, ButtonGroup } from 'reactstrap';
 
 // Dashboard willl show all events
-export default function Dashboard() {
+export default function Dashboard({ history }) {
     const [events, setEvents] = useState([]);
     const [cSelected, setCSelected] = useState([]);
     const [rSelected, setRSelected] = useState(null);
@@ -61,6 +61,7 @@ export default function Dashboard() {
                         onClick={() => handleFilter('Cycling')}
                         active={rSelected === 'Cycling'}>Cycling</Button>
                 </ButtonGroup>
+                <Button color="info" onClick={() => history.push('events')} >Add Event</Button>
             </div>
             <ul className="events-list">
                 {events.map(event => (
