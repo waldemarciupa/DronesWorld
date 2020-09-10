@@ -42,20 +42,20 @@ export default function Dashboard({ history }) {
                         active={rSelected === null}>All</Button>
                     <Button
                         color="primary"
-                        onClick={() => handleFilter(null)}
+                        onClick={handleMyEvents}
                         active={rSelected === 'myevents'}>My events</Button>
                     <Button
                         color="primary"
                         onClick={() => handleFilter('running')}
-                        active={rSelected === 'running'}>Running</Button>
+                        active={rSelected === 'Running'}>Running</Button>
                     <Button
                         color="primary"
-                        onClick={() => handleFilter('esport')}
-                        active={rSelected === 'esport'}>eSport</Button>
+                        onClick={() => handleFilter('eSport')}
+                        active={rSelected === 'eSport'}>eSport</Button>
                     <Button
                         color="primary"
-                        onClick={() => handleFilter('swimming')}
-                        active={rSelected === 'swimming'}>Swimming</Button>
+                        onClick={() => handleFilter('Swimming')}
+                        active={rSelected === 'Swimming'}>Swimming</Button>
                     <Button
                         color="primary"
                         onClick={() => handleFilter('Cycling')}
