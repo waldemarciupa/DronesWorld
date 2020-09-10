@@ -47,12 +47,13 @@ export default function EventsPage({ history }) {
                 setSuccess(true);
                 setTimeout(() => {
                     setSuccess(false);
+                    history.push('/')
                 }, 3000);
             } else {
                 setError(true);
                 setTimeout(() => {
                     setError(false)
-                }, 3000);
+                }, 2000);
                 console.log('Missing required data');
             }
         } catch (error) {
@@ -169,7 +170,7 @@ export default function EventsPage({ history }) {
                         onClick={() => history.push('/')}
                         className="secondary-btn"
                         type="submit">
-                        Dashboard
+                        Cancel
                 </Button>
                 </FormGroup>
             </Form>

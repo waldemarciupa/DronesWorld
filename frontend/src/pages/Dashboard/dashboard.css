@@ -28,7 +28,8 @@ ul.events-list li strong {
 
 .filter-panel {
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between; 
+    margin-bottom: 10px;   
 }
 
 @media (max-width: 770px) {
