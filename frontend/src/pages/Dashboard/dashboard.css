@@ -26,6 +26,8 @@ ul.events-list li strong {
     color: #444;
 }
 
+
+
 @media (max-width: 770px) {
     ul.events-list {
         grid-template-columns: 1fr;

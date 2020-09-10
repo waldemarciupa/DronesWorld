@@ -23,6 +23,10 @@ export default function Dashboard() {
         getEvents(query);
     }
 
+    const handleMyEvents = () => {
+        setRSelected('myevents');
+    }
+
     useEffect(() => {
         getEvents();
     }, [])
@@ -30,13 +34,16 @@ export default function Dashboard() {
     console.log(events);
     return (
         <>
-            <div>
-                Filter:
+            <div className="filter-panel">
                 <ButtonGroup>
                     <Button
                         color="primary"
                         onClick={() => handleFilter(null)}
                         active={rSelected === null}>All</Button>
+                    <Button
+                        color="primary"
+                        onClick={() => handleFilter(null)}
+                        active={rSelected === 'myevents'}>My events</Button>
                     <Button
                         color="primary"
                         onClick={() => handleFilter('running')}
