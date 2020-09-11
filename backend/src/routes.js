@@ -19,6 +19,7 @@ routes.post('/login', LoginController.store);
 // Dashboard
 routes.get('/dashboard/:sport', DashboardController.getAllEvents);
 routes.get('/dashboard', DashboardController.getAllEvents);
+routes.get('/user/events', DashboardController.getAllEventsByUserId);
 routes.get('/event/:eventId', DashboardController.getEventById);
 
 // Event 
