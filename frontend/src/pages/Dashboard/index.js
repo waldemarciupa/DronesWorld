@@ -69,7 +69,15 @@ export default function Dashboard({ history }) {
             <ul className="events-list">
                 {events.map(event => (
                     <li key={event._id}>
-                        <header style={{ backgroundImage: `url(${event.thumbnail_url})` }} />
+                        <header style={{ backgroundImage: `url(${event.thumbnail_url})` }} >
+                            {event.user === user_id ? <Button
+                                size="sm"
+                                color="danger"
+                                onClick={() => handleFilter('Cycling')}
+                            >
+                                Delete
+                            </Button> : ''}
+                        </header>
                         <strong>{event.title}</strong>
                         <span>Event date: {moment(event.date).format('LL')}</span>
                         <span>Event price: {parseFloat(event.price).toFixed(2)}</span>
