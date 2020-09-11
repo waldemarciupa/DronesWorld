@@ -32,5 +32,21 @@ module.exports = {
                 message: 'We do not have any event yet, sorry!'
             })
         }
+    },
+
+    async getAllEventsByUserId(req, res) {
+        const { user_id } = req.headers;
+
+        try {
+            const events = await Event.find({ user: user_id });
+
+            if (events) {
+                return res.json(events)
+            }
+        } catch (error) {
+            return res.status(400).json({
+                message: 'We do not have any event with the user_id, sorry!'
+            })
+        }
     }
 }
