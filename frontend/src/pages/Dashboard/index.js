@@ -70,13 +70,16 @@ export default function Dashboard({ history }) {
                 {events.map(event => (
                     <li key={event._id}>
                         <header style={{ backgroundImage: `url(${event.thumbnail_url})` }} >
-                            {event.user === user_id ? <Button
-                                size="sm"
-                                color="danger"
-                                onClick={() => handleFilter('Cycling')}
-                            >
-                                Delete
-                            </Button> : ''}
+                            {event.user === user_id ?
+                                <div>
+                                    <Button
+                                        size="sm"
+                                        color="danger"
+                                        onClick={() => handleFilter('Cycling')}
+                                    >
+                                        Delete
+                                    </Button>
+                                </div> : ''}
                         </header>
                         <strong>{event.title}</strong>
                         <span>Event date: {moment(event.date).format('LL')}</span>
