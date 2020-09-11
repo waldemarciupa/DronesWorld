@@ -23,8 +23,11 @@ export default function Dashboard({ history }) {
         getEvents(query);
     }
 
-    const handleMyEvents = () => {
+    const handleEventsByUserId = async () => {
         setRSelected('myevents');
+        const response = await api.get('/user/events', { headers: { user_id } });
+        setEvents(response.data);
+
     }
 
     useEffect(() => {
@@ -42,7 +45,7 @@ export default function Dashboard({ history }) {
                         active={rSelected === null}>All</Button>
                     <Button
                         color="primary"
-                        onClick={handleMyEvents}
+                        onClick={handleEventsByUserId}
                         active={rSelected === 'myevents'}>My events</Button>
                     <Button
                         color="primary"
