@@ -38,7 +38,7 @@ export default function Dashboard({ history }) {
             setSuccess(true);
             setTimeout(() => {
                 setSuccess(false);
-                history.push('/')
+                handleFilter(null)
             }, 2000);
 
         } catch (error) {
@@ -108,13 +108,13 @@ export default function Dashboard({ history }) {
                         <Button color="primary">Subscribe</Button>
                     </li>
                 ))}
-                {error ? (
-                    <Alert className="event-validation" color="danger">Erro when deleting event!</Alert>
-                ) : ""}
-                {success ? (
-                    <Alert className="event-validation" color="success">The event was deleted succesfully</Alert>
-                ) : ""}
             </ul>
+            {error ? (
+                <Alert className="event-validation" color="danger">Erro when deleting event!</Alert>
+            ) : ""}
+            {success ? (
+                <Alert className="event-validation" color="success">The event was deleted succesfully</Alert>
+            ) : ""}
         </>
     )
 }
