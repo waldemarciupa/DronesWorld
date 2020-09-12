@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import moment from 'moment';
 import './dashboard.css';
-import { Button, ButtonGroup } from 'reactstrap';
+import { Button, ButtonGroup, Alert } from 'reactstrap';
 
 // Dashboard willl show all events
 export default function Dashboard({ history }) {
     const [events, setEvents] = useState([]);
-    const [cSelected, setCSelected] = useState([]);
     const [rSelected, setRSelected] = useState(null);
+    const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
     const user_id = localStorage.getItem('user');
 
     const getEvents = async (filter) => {
@@ -28,6 +29,25 @@ export default function Dashboard({ history }) {
         const response = await api.get('/user/events', { headers: { user_id } });
         setEvents(response.data);
 
+    }
+
+    const handleDeleteEvent = async (eventId) => {
+
+        try {
+            const deleteEvent = await api.delete(`/event/${eventId}`)
+            setSuccess(true);
+            setTimeout(() => {
+                setSuccess(false);
+                history.push('/')
+            }, 2000);
+
+        } catch (error) {
+            setError(true);
+            setTimeout(() => {
+                setError(false)
+            }, 2000);
+            console.log('Missing required data');
+        }
     }
 
     useEffect(() => {
@@ -75,7 +95,7 @@ export default function Dashboard({ history }) {
                                     <Button
                                         size="sm"
                                         color="danger"
-                                        onClick={() => handleFilter('Cycling')}
+                                        onClick={() => handleDeleteEvent(event._id)}
                                     >
                                         Delete
                                     </Button>
@@ -88,6 +108,12 @@ export default function Dashboard({ history }) {
                         <Button color="primary">Subscribe</Button>
                     </li>
                 ))}
+                {error ? (
+                    <Alert className="event-validation" color="danger">Erro when deleting event!</Alert>
+                ) : ""}
+                {success ? (
+                    <Alert className="event-validation" color="success">The event was deleted succesfully</Alert>
+                ) : ""}
             </ul>
         </>
     )
