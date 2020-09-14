@@ -29,7 +29,7 @@ module.exports = {
                 return jwt.sign({ user: userResponse }, 'secret', (err, token) => {
                     return res.json({
                         user: token,
-                        user_id: user_id
+                        user_id: userResponse._id
                     })
                 })
                 // return res.json(userResponse)
