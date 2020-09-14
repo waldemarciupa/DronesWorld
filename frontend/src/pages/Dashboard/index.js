@@ -10,11 +10,12 @@ export default function Dashboard({ history }) {
     const [rSelected, setRSelected] = useState(null);
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
-    const user_id = localStorage.getItem('user');
+    const user = localStorage.getItem('user');
+    const user_id = localStorage.getItem('user_id');
 
     const getEvents = async (filter) => {
         const url = filter ? `/dashboard/${filter}` : '/dashboard';
-        const response = await api.get(url, { headers: { user_id } });
+        const response = await api.get(url, { headers: { user: user } });
 
         setEvents(response.data);
     };
@@ -26,7 +27,7 @@ export default function Dashboard({ history }) {
 
     const handleEventsByUserId = async () => {
         setRSelected('myevents');
-        const response = await api.get('/user/events', { headers: { user_id } });
+        const response = await api.get('/user/events', { headers: { user: user } });
         setEvents(response.data);
 
     }
