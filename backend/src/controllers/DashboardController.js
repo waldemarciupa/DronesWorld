@@ -1,4 +1,5 @@
 const Event = require('../models/Event');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
 
@@ -17,21 +18,27 @@ module.exports = {
         }
     },
 
-    async getAllEvents(req, res) {
-        const { sport } = req.params;
-        const query = sport ? { sport } : {};
+    getAllEvents(req, res) {
+        jwt.verify(req.token, 'secret', async (err, authData) => {
+            if (err) {
+                res.sendStatus(401);
+            } else {
+                const { sport } = req.params;
+                const query = sport ? { sport } : {};
 
-        try {
-            const events = await Event.find(query);
+                try {
+                    const events = await Event.find(query);
 
-            if (events) {
-                return res.json(events)
+                    if (events) {
+                        return res.json({ authData, events })
+                    }
+                } catch (error) {
+                    return res.status(400).json({
+                        message: 'We do not have any event yet, sorry!'
+                    })
+                }
             }
-        } catch (error) {
-            return res.status(400).json({
-                message: 'We do not have any event yet, sorry!'
-            })
-        }
+        })
     },
 
     async getAllEventsByUserId(req, res) {
