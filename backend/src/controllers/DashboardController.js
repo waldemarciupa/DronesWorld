@@ -2,20 +2,25 @@ const Event = require('../models/Event');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
+    getEventById(req, res) {
+        jwt.verify(req.token, 'secret', async (err, authData) => {
+            if (err) {
+                res.sendStatus(403);
+            } else {
+                const { eventId } = req.params;
+                try {
+                    const event = await Event.findById(eventId);
 
-    async getEventById(req, res) {
-        const { eventId } = req.params;
-        try {
-            const event = await Event.findById(eventId);
-
-            if (event) {
-                return res.json(event)
+                    if (event) {
+                        return res.json({ authData, events })
+                    }
+                } catch (error) {
+                    return res.status(400).json({
+                        message: 'Event does not exist!'
+                    })
+                }
             }
-        } catch (error) {
-            return res.status(400).json({
-                message: 'Event does not exist!'
-            })
-        }
+        })
     },
 
     getAllEvents(req, res) {
