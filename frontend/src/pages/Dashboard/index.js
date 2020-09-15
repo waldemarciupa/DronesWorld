@@ -14,10 +14,14 @@ export default function Dashboard({ history }) {
     const user_id = localStorage.getItem('user_id');
 
     const getEvents = async (filter) => {
-        const url = filter ? `/dashboard/${filter}` : '/dashboard';
-        const response = await api.get(url, { headers: { user: user } });
+        try {
+            const url = filter ? `/dashboard/${filter}` : '/dashboard';
+            const response = await api.get(url, { headers: { user: user } });
 
-        setEvents(response.data);
+            setEvents(response.data.events);
+        } catch (error) {
+            history.push('/login');
+        }
     };
 
     const handleFilter = (query) => {
@@ -55,7 +59,6 @@ export default function Dashboard({ history }) {
         getEvents();
     }, [])
 
-    console.log(events);
     return (
         <>
             <div className="filter-panel">
