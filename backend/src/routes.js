@@ -1,4 +1,5 @@
 const express = require('express');
+const verifyToken = require('./config/verifyToken');
 const multer = require('multer');
 const UserController = require('./controllers/UserController');
 const EventController = require('./controllers/EventController');
@@ -17,10 +18,10 @@ routes.get('/status', (req, res) => {
 routes.post('/login', LoginController.store);
 
 // Dashboard
-routes.get('/dashboard/:sport', DashboardController.getAllEvents);
-routes.get('/dashboard', DashboardController.getAllEvents);
-routes.get('/user/events', DashboardController.getAllEventsByUserId);
-routes.get('/event/:eventId', DashboardController.getEventById);
+routes.get('/dashboard/:sport', verifyToken, DashboardController.getAllEvents);
+routes.get('/dashboard', verifyToken, DashboardController.getAllEvents);
+routes.get('/user/events', verifyToken, DashboardController.getAllEventsByUserId);
+routes.get('/event/:eventId', verifyToken, DashboardController.getEventById);
 
 // Event 
 routes.post('/event', upload.single('thumbnail'), EventController.createEvent);
