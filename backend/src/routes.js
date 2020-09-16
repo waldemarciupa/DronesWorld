@@ -24,8 +24,8 @@ routes.get('/user/events', verifyToken, DashboardController.getAllEventsByUserId
 routes.get('/event/:eventId', verifyToken, DashboardController.getEventById);
 
 // Event 
-routes.post('/event', upload.single('thumbnail'), EventController.createEvent);
-routes.delete('/event/:eventId', EventController.delete)
+routes.post('/event', verifyToken, upload.single('thumbnail'), EventController.createEvent);
+routes.delete('/event/:eventId', verifyToken, EventController.delete)
 
 // User
 routes.post('/user/register', UserController.createUser);
