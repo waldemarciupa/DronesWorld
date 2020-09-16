@@ -4,7 +4,6 @@ import { Button, Form, FormGroup, Label, Input, Container, Alert, ButtonDropdown
 import CameraIcon from '../../assets/camera.png';
 import './events.css';
 
-// Events willl show all events
 export default function EventsPage({ history }) {
 
     const [title, setTitle] = useState('');
@@ -25,7 +24,7 @@ export default function EventsPage({ history }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const user_id = localStorage.getItem('user');
+        const user = localStorage.getItem('user');
         const eventData = new FormData;
 
         eventData.append("thumbnail", thumbnail);
@@ -43,7 +42,7 @@ export default function EventsPage({ history }) {
                 date !== "" &&
                 thumbnail !== null
             ) {
-                await api.post('/event', eventData, { headers: { user_id } });
+                await api.post('/event', eventData, { headers: { user } });
                 setSuccess(true);
                 setTimeout(() => {
                     setSuccess(false);
@@ -151,13 +150,6 @@ export default function EventsPage({ history }) {
                                 }}>eSport</DropdownItem>
                             </DropdownMenu>
                         </ButtonDropdown>
-                        {/* <Input
-                            id="sport"
-                            type="text"
-                            value={sport}
-                            placeholder="Sport name"
-                            onChange={(event) => setSport(event.target.value)}
-                        /> */}
                     </FormGroup>
                 </div>
                 <FormGroup>

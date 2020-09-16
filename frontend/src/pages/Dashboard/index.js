@@ -17,7 +17,6 @@ export default function Dashboard({ history }) {
         try {
             const url = filter ? `/dashboard/${filter}` : '/dashboard';
             const response = await api.get(url, { headers: { user: user } });
-
             setEvents(response.data.events);
         } catch (error) {
             history.push('/login');
