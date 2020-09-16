@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import api from '../../services/api'
 import { Button, Form, FormGroup, Label, Input, Container, Alert, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import CameraIcon from '../../assets/camera.png';
@@ -15,6 +15,11 @@ export default function EventsPage({ history }) {
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
     const [dropdownOpen, setOpen] = useState(false);
+    const user = localStorage.getItem('user');
+
+    useEffect(() => {
+        if (!user) history.push('/login')
+    }, [])
 
     const toggle = () => setOpen(!dropdownOpen);
 
@@ -24,8 +29,7 @@ export default function EventsPage({ history }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const user = localStorage.getItem('user');
-        const eventData = new FormData;
+        const eventData = new FormData();
 
         eventData.append("thumbnail", thumbnail);
         eventData.append("sport", sport);
@@ -62,7 +66,6 @@ export default function EventsPage({ history }) {
 
     const handleSportEvent = (sport) => {
         setSport(sport)
-        console.log(sport);
     }
         ;
 
