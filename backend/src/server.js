@@ -11,12 +11,17 @@ const app = express();
 const server = http.Server(app);
 const io = socketio(server);
 
+io.on('connection', socket => {
+    console.log('User is connected', socket.id);
+})
+
+app.use(cors())
+app.use(express.json())
+
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
 
-app.use(cors())
-app.use(express.json())
 
 try {
     mongoose.connect(process.env.MONGO_DB_CONNECTION,
