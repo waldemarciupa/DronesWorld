@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import moment from 'moment';
+import socketio from 'socket.io-client';
 import './dashboard.css';
 import { Button, ButtonGroup, Alert } from 'reactstrap';
 
@@ -67,6 +68,10 @@ export default function Dashboard({ history }) {
 
     useEffect(() => {
         getEvents();
+    }, [])
+
+    useEffect(() => {
+        const socket = socketio('http://localhost:8000/')
     }, [])
 
     return (
