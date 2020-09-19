@@ -11,8 +11,13 @@ const app = express();
 const server = http.Server(app);
 const io = socketio(server);
 
+const connectedUsers = {};
+
 io.on('connection', socket => {
-    console.log('User is connected', socket.id);
+    const { user } = socket.handshake.query;
+
+    connectedUsers[user] = socket.id;
+    console.log(connectedUsers);
 })
 
 app.use(cors())
