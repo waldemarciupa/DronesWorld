@@ -6,6 +6,7 @@ const EventController = require('./controllers/EventController');
 const DashboardController = require('./controllers/DashboardController');
 const uploadConfig = require('./config/upload');
 const LoginController = require('./controllers/LoginController');
+const Registration = require('./models/Registration');
 
 const routes = express.Router();
 const upload = multer(uploadConfig);
@@ -16,6 +17,9 @@ routes.get('/status', (req, res) => {
 
 // Login
 routes.post('/login', LoginController.store);
+
+// Registration
+routes.post('/registration/:eventId', RegistrationController)
 
 // Dashboard
 routes.get('/dashboard/:sport', verifyToken, DashboardController.getAllEvents);
