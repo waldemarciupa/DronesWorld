@@ -71,7 +71,7 @@ export default function Dashboard({ history }) {
     }, [])
 
     useEffect(() => {
-        const socket = socketio('http://localhost:8000/')
+        const socket = socketio('http://localhost:8000/', { query: { user_id } })
     }, [])
 
     return (
