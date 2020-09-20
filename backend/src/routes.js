@@ -1,12 +1,12 @@
 const express = require('express');
 const verifyToken = require('./config/verifyToken');
 const multer = require('multer');
+const uploadConfig = require('./config/upload');
 const UserController = require('./controllers/UserController');
 const EventController = require('./controllers/EventController');
 const DashboardController = require('./controllers/DashboardController');
-const uploadConfig = require('./config/upload');
 const LoginController = require('./controllers/LoginController');
-const Registration = require('./models/Registration');
+const RegistrationController = require('./controllers/RegistrationController');
 
 const routes = express.Router();
 const upload = multer(uploadConfig);
@@ -19,7 +19,7 @@ routes.get('/status', (req, res) => {
 routes.post('/login', LoginController.store);
 
 // Registration
-routes.post('/registration/:eventId', RegistrationController)
+routes.post('/registration/:eventId', RegistrationController.create)
 
 // Dashboard
 routes.get('/dashboard/:sport', verifyToken, DashboardController.getAllEvents);
