@@ -15,7 +15,7 @@ module.exports = {
 
         await registration
             .populate('event')
-            .populate('user')
+            .populate('user', '-password')
             .execPopulate();
 
         return res.json(registration);
