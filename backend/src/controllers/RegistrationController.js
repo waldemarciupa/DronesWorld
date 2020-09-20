@@ -6,5 +6,13 @@ module.exports = {
         const { user_id } = req.header;
         const { event_id } = req.params;
         const { date } = req.body;
+
+        const registration = await Registration.create({
+            user: user_id,
+            event: event_id,
+            date
+        })
+
+        return res.json(registration);
     }
 }
