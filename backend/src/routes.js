@@ -19,7 +19,8 @@ routes.get('/status', (req, res) => {
 routes.post('/login', LoginController.store);
 
 // Registration
-routes.post('/registration/:eventId', RegistrationController.create)
+routes.post('/registration/:eventId', RegistrationController.create);
+routes.get('/registration/:registration_id', RegistrationController.getRegistration);
 
 // Dashboard
 routes.get('/dashboard/:sport', verifyToken, DashboardController.getAllEvents);
