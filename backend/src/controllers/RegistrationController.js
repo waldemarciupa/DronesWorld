@@ -19,5 +19,17 @@ module.exports = {
             .execPopulate();
 
         return res.json(registration);
+    },
+
+    async getRegistration(req, res) {
+        const { registration_id } = req.params;
+
+        try {
+            const registration = await Registration.findById(registration_id);
+
+            return res.json(registration);
+        } catch (error) {
+            return res.status(400).json({ message: 'Registration not found' })
+        }
     }
 }
