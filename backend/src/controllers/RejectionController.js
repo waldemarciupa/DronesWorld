@@ -1,7 +1,7 @@
 const Registration = require('../models/Registration');
 
 module.exports = {
-    async approval(req, res) {
+    async rejection(req, res) {
         const { registration_id } = req.params;
 
         try {
