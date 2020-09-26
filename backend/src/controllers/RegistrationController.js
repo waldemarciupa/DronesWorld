@@ -7,7 +7,7 @@ module.exports = {
             if (err) {
                 res.sendStatus(401);
             } else {
-                const { user_id } = req.headers;
+                const user_id = authData.user._id;
                 const { eventId } = req.params;
                 const { date } = req.body;
 
@@ -21,6 +21,8 @@ module.exports = {
                     .populate('event')
                     .populate('user', '-password')
                     .execPopulate();
+
+                const ownerSocket = req.connectedUsers
 
                 return res.json(registration);
             }
