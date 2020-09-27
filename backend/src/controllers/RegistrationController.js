@@ -24,6 +24,10 @@ module.exports = {
 
                 const ownerSocket = req.connectedUsers[registration.event.user]
 
+                if (ownerSocket) {
+                    req.io.to(ownerSocket).emit('registration_request', registration)
+                }
+
                 return res.json(registration);
             }
         })
