@@ -12,8 +12,7 @@ module.exports = {
 
                 const registration = await Registration.create({
                     user: user_id,
-                    event: eventId,
-                    date
+                    event: eventId
                 })
 
                 await registration
