@@ -1,5 +1,5 @@
 const Registration = require('../models/Registration');
-const jwt = required('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     async create(req, res) {
@@ -9,7 +9,6 @@ module.exports = {
             } else {
                 const user_id = authData.user._id;
                 const { eventId } = req.params;
-                const { date } = req.body;
 
                 const registration = await Registration.create({
                     user: user_id,
