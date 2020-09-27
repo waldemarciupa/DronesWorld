@@ -22,7 +22,7 @@ module.exports = {
                     .populate('user', '-password')
                     .execPopulate();
 
-                const ownerSocket = req.connectedUsers
+                const ownerSocket = req.connectedUsers[registration.event.user]
 
                 return res.json(registration);
             }
