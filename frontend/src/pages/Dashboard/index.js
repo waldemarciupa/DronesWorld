@@ -115,6 +115,9 @@ export default function Dashboard({ history }) {
                         <li key={event._id}>
                             <p>
                                 <strong>{event.user.email}</strong> Is requesting to register to your event
+                                <strong>{event.title}</strong>
+                                <Button color="secondary" onClick={() => history.push('events')} >Add Event</Button>
+                                <Button color="danger" onClick={handleLogout} >Logout</Button>
                             </p>
                         </li>
                     )
