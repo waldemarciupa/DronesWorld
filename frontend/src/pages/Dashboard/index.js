@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import api from '../../services/api';
 import moment from 'moment';
 import socketio from 'socket.io-client';
@@ -12,6 +12,8 @@ export default function Dashboard({ history }) {
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
     const [messageHandler, setMessageHandler] = useState('');
+    const [eventsRequests, setEventsRequests] = useState([]);
+
     const user = localStorage.getItem('user');
     const user_id = localStorage.getItem('user_id');
 
@@ -95,14 +97,20 @@ export default function Dashboard({ history }) {
         getEvents();
     }, [])
 
-    useEffect(() => {
-        const socket = socketio('http://localhost:8000/', { query: { user: user_id } })
+    const socket = useMemo(
+        () =>
+            socketio('http://localhost:8000/', { query: { user: user_id } }),
+        [user_id]
+    );
 
-        socket.on('registration_request', data => console.log(data))
+    useEffect(() => {
+
+        socket.on('registration_request', data => (setEventsRequests([...eventsRequests, data])))
     }, [])
 
     return (
         <>
+            {console.log(eventsRequests)}
             <div className="filter-panel">
                 <ButtonGroup>
                     <Button
