@@ -95,7 +95,7 @@ export default function Dashboard({ history }) {
 
     useEffect(() => {
         getEvents();
-    }, [])
+    }, []);
 
     const socket = useMemo(
         () =>
@@ -105,11 +105,21 @@ export default function Dashboard({ history }) {
 
     useEffect(() => {
         socket.on('registration_request', data => (setEventsRequests([...eventsRequests, data])))
-    }, [eventsRequests, socket])
+    }, [eventsRequests, socket]);
 
     return (
         <>
-            {console.log(eventsRequests)}
+            <ul className="notification">
+                {eventsRequests.map(event => {
+                    return (
+                        <li key={event._id}>
+                            <p>
+                                <strong>{event.user.email}</strong> Is requesting to register to your event
+                            </p>
+                        </li>
+                    )
+                })}
+            </ul>
             <div className="filter-panel">
                 <ButtonGroup>
                     <Button
