@@ -104,9 +104,8 @@ export default function Dashboard({ history }) {
     );
 
     useEffect(() => {
-
         socket.on('registration_request', data => (setEventsRequests([...eventsRequests, data])))
-    }, [])
+    }, [eventsRequests, socket])
 
     return (
         <>
