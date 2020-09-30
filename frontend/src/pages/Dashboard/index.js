@@ -110,15 +110,15 @@ export default function Dashboard({ history }) {
     return (
         <>
             <ul className="notification">
-                {eventsRequests.map(event => {
+                {eventsRequests.map(request => {
                     return (
-                        <li key={event._id}>
-                            <p>
-                                <strong>{event.user.email}</strong> Is requesting to register to your event
-                                <strong>{event.title}</strong>
+                        <li key={request._id}>
+                            <div>
+                                <strong>{request.user.email}</strong> Is requesting to register to your event
+                                <strong>{request.event.title}</strong>
                                 <Button color="secondary" onClick={() => { }} >Accept</Button>
                                 <Button color="danger" onClick={() => { }}>Cancel</Button>
-                            </p>
+                            </div>
                         </li>
                     )
                 })}
