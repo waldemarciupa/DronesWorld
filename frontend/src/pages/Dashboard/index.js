@@ -116,9 +116,11 @@ export default function Dashboard({ history }) {
                             <div>
                                 <strong>{request.user.email}</strong> Is requesting to register to your event
                                 <strong>{request.event.title}</strong>
+                            </div>
+                            <ButtonGroup>
                                 <Button color="secondary" onClick={() => { }} >Accept</Button>
                                 <Button color="danger" onClick={() => { }}>Cancel</Button>
-                            </div>
+                            </ButtonGroup>
                         </li>
                     )
                 })}
