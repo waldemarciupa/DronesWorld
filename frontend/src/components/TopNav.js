@@ -19,10 +19,10 @@ const TopNav = () => {
                 <Collapse isOpen={!collapsed} navbar>
                     <Nav navbar>
                         <NavItem>
-                            <NavLink href="/components/">Components</NavLink>
+                            <Link to="/events">Events</Link>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                            <Link to="/">Dashboard</Link>
                         </NavItem>
                     </Nav>
                 </Collapse>
