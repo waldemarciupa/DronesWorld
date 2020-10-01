@@ -148,7 +148,7 @@ export default function Dashboard({ history }) {
                 </ButtonGroup>
                 <ButtonGroup>
                     <Button color="secondary" onClick={() => history.push('events')} >Add Event</Button>
-                    <Button color="danger" onClick={handleLogout} >Logout</Button>
+                    <Button color="danger" onClick={() => { }} >Logout</Button>
                 </ButtonGroup>
             </div>
             <ul className="events-list">
