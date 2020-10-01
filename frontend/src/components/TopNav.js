@@ -6,11 +6,16 @@ const TopNav = () => {
 
     const toggleNavbar = () => setCollapsed(!collapsed);
 
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        localStorage.removeItem('user_id');
+    }
+
     return (
         <div>
             <Navbar color="faded" light>
-                <NavbarBrand href="/" className="mr-auto">reactstrap</NavbarBrand>
                 <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+                <Link to="/login" onClick={handleLogout}>Logout</Link>
                 <Collapse isOpen={!collapsed} navbar>
                     <Nav navbar>
                         <NavItem>

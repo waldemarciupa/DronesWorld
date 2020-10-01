@@ -66,12 +66,6 @@ export default function Dashboard({ history }) {
         }
     }
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('user_id');
-        history.push('/login');
-    }
-
     const handleRegistrationRequest = async (event) => {
         try {
             await api.post(`/registration/${event.id}`, {}, { headers: { user } })
