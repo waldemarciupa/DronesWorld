@@ -12,7 +12,7 @@ export const ContextWrapper = (props) => {
     }
 
     return (
-        <UserContext.Provider>
+        <UserContext.Provider value={user}>
             {props.children}
         </UserContext.Provider>
     )
