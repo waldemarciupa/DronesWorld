@@ -4,7 +4,13 @@ export const UserContext = createContext();
 
 export const ContextWrapper = (props) => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const defaultValueHandler = () => {
+        const user = localStorage.getItem('user');
+        if (user) return true;
+        return false;
+    }
+
+    const [isLoggedIn, setIsLoggedIn] = useState(defaultValueHandler);
 
     const user = {
         isLoggedIn,
