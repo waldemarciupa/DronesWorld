@@ -12,6 +12,7 @@ const TopNav = () => {
     const handleLogout = () => {
         localStorage.removeItem('user');
         localStorage.removeItem('user_id');
+        setIsLoggedIn(false);
     }
 
     return isLoggedIn ? <div>
