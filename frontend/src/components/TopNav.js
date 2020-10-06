@@ -14,24 +14,22 @@ const TopNav = () => {
         localStorage.removeItem('user_id');
     }
 
-    return isLoggedIn ? (
-        <div>
-            <Navbar color="faded" light>
-                <NavbarToggler onClick={toggleNavbar} className="mr-2" />
-                <Link to="/login" onClick={handleLogout}>Logout</Link>
-                <Collapse isOpen={!collapsed} navbar>
-                    <Nav navbar>
-                        <NavItem>
-                            <Link to="/events">Events</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/">Dashboard</Link>
-                        </NavItem>
-                    </Nav>
-                </Collapse>
-            </Navbar>
-        </div>
-    ) : ""
+    return isLoggedIn ? <div>
+        <Navbar color="faded" light>
+            <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+            <Link to="/login" onClick={handleLogout}>Logout</Link>
+            <Collapse isOpen={!collapsed} navbar>
+                <Nav navbar>
+                    <NavItem>
+                        <Link to="/events">Events</Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/">Dashboard</Link>
+                    </NavItem>
+                </Nav>
+            </Collapse>
+        </Navbar>
+    </div> : ""
 }
 
 export default TopNav;
