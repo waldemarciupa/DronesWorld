@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../user-context';
 
 const TopNav = () => {
-    const [isLoggedIn, setIsLoggedIn] = useContext(UserContext);
+    const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
     const [collapsed, setCollapsed] = useState(true);
 
     const toggleNavbar = () => setCollapsed(!collapsed);
@@ -14,7 +14,7 @@ const TopNav = () => {
         localStorage.removeItem('user_id');
     }
 
-    return (
+    return isLoggedIn ? (
         <div>
             <Navbar color="faded" light>
                 <NavbarToggler onClick={toggleNavbar} className="mr-2" />
@@ -31,7 +31,7 @@ const TopNav = () => {
                 </Collapse>
             </Navbar>
         </div>
-    );
+    ) : ""
 }
 
 export default TopNav;
